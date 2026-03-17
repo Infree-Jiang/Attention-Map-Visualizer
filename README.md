@@ -1,16 +1,15 @@
-# DAAM Image-to-Image Attention Heatmap Demo
+# DAAM Attention Heatmap Visualization Demo
 
-Visualizes **cross-attention heatmaps** for abstract human attributes on a portrait image using Stable Diffusion img2img + [DAAM](https://github.com/castorini/daam).
+Visualizes **cross-attention heatmaps** for abstract human attributes on a portrait image using [DAAM] (https://github.com/castorini/daam).
 
 Given one input portrait, the script runs three prompts — *trustworthy*, *smart*, *dominant* — and produces side-by-side comparisons showing where in the image each concept is spatially attended to.
+
+> This project was fully generated via claude code agent. No manual code was written.
 
 ---
 
 ## How it works
 
-The pipeline uses **Stable Diffusion img2img** (`runwayml/stable-diffusion-v1-5`) with a low `strength=0.4`, meaning the input image is mostly preserved while the diffusion loop still runs. DAAM hooks into the **cross-attention layers** at every denoising step to accumulate attention weights between each text token and each spatial position in the latent. After inference, the per-word attention map is extracted, normalized, and overlaid on the original image using a jet colormap.
-
-```
 Input image
     │
     ▼
@@ -49,16 +48,6 @@ home/
     ├── smart_comparison.png
     └── dominant_comparison.png
 ```
-
-### `attention_map.py`
-
-The single runnable script. Key sections:
-
-- **Compatibility shim** (lines 11–29): patches `huggingface_hub >= 0.17` which removed `cached_download`, a symbol still required by `diffusers==0.21.2`.
-- **Config block** (lines 34–47): all tunable parameters (`STRENGTH`, `NUM_STEPS`, `SEED`, `MODEL_ID`, `PROMPTS`) are at the top of the file for easy editing.
-- **`load_image`**: resizes the input to 512×512 (SD's native resolution).
-- **`make_overlay`**: blends a normalized heatmap onto the base image using matplotlib's jet colormap.
-- **`main`**: loads the pipeline, loops over the three concepts, runs DAAM-traced inference, and saves comparison figures.
 
 ### `requirements.txt`
 
