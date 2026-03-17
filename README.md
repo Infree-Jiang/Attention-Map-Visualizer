@@ -9,7 +9,7 @@ Given one input portrait, the script runs three prompts — *trustworthy*, *smar
 ---
 
 ## How it works
-
+'''
 Input image
     │
     ▼
