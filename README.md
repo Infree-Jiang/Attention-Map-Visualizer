@@ -77,8 +77,6 @@ conda activate your_env
 pip install -r requirements.txt
 ```
 
-> **Note:** `huggingface_hub` in this environment is newer than what `diffusers==0.21.2` expects. The compatibility shim in `attention_map.py` handles this automatically — no manual patching needed.
-
 ### 3. (First run) Download the model
 
 The script downloads `runwayml/stable-diffusion-v1-5` (~4 GB) from Hugging Face on first run. To set a custom cache directory:
