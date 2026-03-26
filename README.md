@@ -51,19 +51,14 @@ home/
     └── dominant_comparison.png
 ```
 
-### `attention_map.py`
-
-The single runnable script. Key sections:
-
-- **Compatibility shim** (lines 11–29): patches `huggingface_hub >= 0.17` which removed `cached_download`, a symbol still required by `diffusers==0.21.2`.
-- **Config block** (lines 34–47): all tunable parameters (`STRENGTH`, `NUM_STEPS`, `SEED`, `MODEL_ID`, `PROMPTS`) are at the top of the file for easy editing.
-- **`load_image`**: resizes the input to 512×512 (SD's native resolution).
-- **`make_overlay`**: blends a normalized heatmap onto the base image using matplotlib's jet colormap.
-- **`main`**: loads the pipeline, loops over the three concepts, runs DAAM-traced inference, and saves comparison figures.
-
 ### `requirements.txt`
 
-Exact package versions from the verified working `att_map` conda environment. Pinned because `daam==0.2.0` has a hard dependency on `diffusers==0.21.2`, which in turn requires older versions of `transformers` and `huggingface_hub`.
+`torch==2.10.0`
+`diffusers==0.21.2`
+`daam==0.2.0`
+`transformers==4.30.2`
+`accelerate==0.23.0`
+`huggingface_hub==0.36.2`
 
 ---
 
